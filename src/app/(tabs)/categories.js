@@ -1,6 +1,6 @@
 import { View, Text } from 'react-native'
 
-export default function Favorite() {
+export default function Catagories() {
   return (
     <View>
       <Text>Home</Text>
