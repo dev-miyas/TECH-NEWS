@@ -15,7 +15,7 @@ export const light = {
     sigInk: '#ffffff',    // text/icon on top of sig
   }
  export const dark =  {
-    bg: '#0a0a09',
+    bg: 'rgb(10, 10, 9)',
     surface: '#111110',
     surface2: '#17170f',
     ink: '#edece5',
@@ -27,17 +27,9 @@ export const light = {
     sigInk: '#0a0a09',
   }
 
-export const FONTS = {
-  head: 'SchibstedGrotesk_700Bold',        // headlines, wordmark
-  headBlack: 'SchibstedGrotesk_800ExtraBold', // masthead / big numerals
-  medium: 'SchibstedGrotesk_500Medium',    // meta, labels, tab labels
-  serif: 'Newsreader_400Regular',          // long-form body, deks
-  serifItalic: 'Newsreader_400Regular_Italic', // category kickers
-}
 
 export const themes = {
   light,
   dark,
-  FONTS
 } 
 export default themes

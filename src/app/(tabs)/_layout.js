@@ -1,7 +1,8 @@
 import { Tabs } from 'expo-router'
 import { Feather } from '@expo/vector-icons'
 import useTheme from '../../store/useTheme'
-import { FONTS } from '../../utils/colors'
+import { FONTS } from '../../utils/fonts'
+
 
 export default function TabsLayout() {
   const { colors } = useTheme()
