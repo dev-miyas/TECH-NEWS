@@ -4,6 +4,7 @@ import { useTheme } from "../../store/useTheme";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Header from "../components/header";
 import Icon from "../components/icon";
+import Chips from "../components/chips";
 import SearchInput from "../components/searchInput";
 import { useState } from "react";
 
@@ -44,6 +45,7 @@ export default function Home() {
         value={searchValue}
         onChangeText={setSearchValue}
       />
+      <Chips />
     </SafeAreaView>
   );
 }

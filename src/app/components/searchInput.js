@@ -16,7 +16,7 @@ export default function searchInput({ value, onChangeText }) {
         style={styles.input}
         value={value}
         onChangeText={onChangeText}
-        placeholderTextColor={colors.rule}
+        placeholderTextColor={colors.ruleStrong}
       />
     </View>
   );
@@ -39,7 +39,7 @@ const createStyles = (colors, fsize, spacing) =>
       flex: 1,
       color: colors.ink,
       fontFamily: FONTS.medium,
-      fontSize: 13,
+      fontSize: 15,
       paddingVertical: 0,
     },
   });
