@@ -43,4 +43,8 @@ yarn-error.*
 
 
 ###########
+<<<<<<< HEAD
 /design
+=======
+design/
+>>>>>>> searchInput
