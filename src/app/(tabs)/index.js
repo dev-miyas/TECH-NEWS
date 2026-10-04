@@ -1,4 +1,4 @@
-import { View, Alert } from "react-native";
+import { View, Alert,FlatList } from "react-native";
 import Today from "../components/today";
 import { useTheme } from "../../store/useTheme";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -13,6 +13,13 @@ export default function Home() {
   const styles = createStyles(colors, fSize, spacing);
   const [searchValue, setSearchValue] = useState("");
   const Name=themeMode==='light' ? 'moon-outline':'sunny-outline'
+  const data = [
+    { id: '1', title: 'Google Gemini ' },
+    { id: '2', title: 'Card 2' },
+    { id: '3', title: 'Card 3' },
+    { id: '4', title: 'Card 4' },
+    { id: '5', title: 'Card 5' },
+  ];
   function notify() {
     Alert.alert(
       "Notification button pressed",
@@ -40,13 +47,24 @@ export default function Home() {
           <Icon name="notifications-outline" action={notify} />
         </View>
       </View>
-
-      <SearchInput
-        value={searchValue}
-        onChangeText={setSearchValue}
+<FlatList
+        data={data}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <Card title={item.title} />
+          
+        )}
+        ListHeaderComponent={
+          <>
+            <SearchInput
+              value={searchValue}
+              onChangeText={setSearchValue}
+            />
+            <Chips />
+          </>
+        }
       />
-      <Chips />
-      <Card />
+      
       
     </SafeAreaView>
   );
