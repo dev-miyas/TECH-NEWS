@@ -1,4 +1,4 @@
-import { View, Alert,FlatList } from "react-native";
+import { View, Alert,FlatList,Text,Pressable } from "react-native";
 import Today from "../components/today";
 import { useTheme } from "../../store/useTheme";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -8,18 +8,26 @@ import Chips from "../components/chips";
 import SearchInput from "../components/searchInput";
 import { useState } from "react";
 import Card from "../components/card";
+import { FONTS } from "../../utils/fonts";
 export default function Home() {
   const { colors, fSize, spacing, toggleTheme,themeMode } = useTheme();
   const styles = createStyles(colors, fSize, spacing);
   const [searchValue, setSearchValue] = useState("");
   const Name=themeMode==='light' ? 'moon-outline':'sunny-outline'
-  const data = [
-    { id: '1', title: 'Google Gemini ' },
-    { id: '2', title: 'Card 2' },
-    { id: '3', title: 'Card 3' },
-    { id: '4', title: 'Card 4' },
-    { id: '5', title: 'Card 5' },
-  ];
+
+const ListHeaderComponent = () => (
+  <View style={styles.listHeaderContainer}>
+    <View style={styles.divider} />
+
+    <View style={styles.headerRow}>
+      <Text style={styles.listHeaderTitle}>THE FEED</Text>
+
+      <Pressable onPress={() => Alert.alert('See all pressed')}>
+        <Text style={styles.seeAll}>SEE ALL</Text>
+      </Pressable>
+    </View>
+  </View>
+);
   function notify() {
     Alert.alert(
       "Notification button pressed",
@@ -50,10 +58,7 @@ export default function Home() {
 <FlatList
         data={data}
         keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <Card title={item.title} />
-          
-        )}
+  
         ListHeaderComponent={
           <>
             <SearchInput
@@ -61,6 +66,8 @@ export default function Home() {
               onChangeText={setSearchValue}
             />
             <Chips />
+            <Card title={"Top Stories"}/>
+            <ListHeaderComponent/>
           </>
         }
       />
@@ -76,4 +83,40 @@ const createStyles = (colors, fSize, spacing) => ({
     backgroundColor: colors.bg,
     paddingHorizontal: spacing.l,
   },
-});
+  listHeaderContainer: {
+  marginTop: spacing.l,
+  paddingHorizontal: spacing.l,
+},
+
+divider: {
+  width: '100%',
+  height: 2,
+  marginBottom: spacing.s,
+  backgroundColor: colors.ink,
+},
+
+headerRow: {
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+},
+
+listHeaderTitle: {
+  color: colors.ink,
+  fontFamily: FONTS.headBlack,
+  fontSize: 16,
+  lineHeight: 18,
+  letterSpacing: 0.5,
+  fontWeight: 'bold',
+  textTransform: 'uppercase',
+},
+
+seeAll: {
+  color: colors.dim,
+  fontFamily: FONTS.medium,
+  fontSize: 13,
+  lineHeight: 16,
+  letterSpacing: 0.5,
+  textTransform: 'uppercase',
+},
+})

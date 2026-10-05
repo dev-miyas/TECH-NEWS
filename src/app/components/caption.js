@@ -5,7 +5,7 @@ import { Ionicons } from '@expo/vector-icons';
 import useTheme from '../../store/useTheme';
 import { FONTS } from '../../utils/fonts';
 
-export default function Caption({ author, readTime }) {
+export default function Caption({ author, readTime ,postedTime}) {
   const { colors } = useTheme();
 
   return (
