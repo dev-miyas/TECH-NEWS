@@ -2,11 +2,31 @@ import { Tabs } from 'expo-router'
 import { Feather } from '@expo/vector-icons'
 import useTheme from '../../store/useTheme'
 import { FONTS } from '../../utils/fonts'
-
+import { useFonts } from 'expo-font'
+import {
+  SchibstedGrotesk_700Bold,
+  SchibstedGrotesk_800ExtraBold,
+  SchibstedGrotesk_500Medium,
+} from '@expo-google-fonts/schibsted-grotesk'
+import {
+  Newsreader_400Regular,
+  Newsreader_400Regular_Italic,
+} from '@expo-google-fonts/newsreader'
 
 export default function TabsLayout() {
   const { colors } = useTheme()
 
+  const [fontsLoaded] = useFonts({
+    SchibstedGrotesk_700Bold,
+    SchibstedGrotesk_800ExtraBold,
+    SchibstedGrotesk_500Medium,
+    Newsreader_400Regular,
+    Newsreader_400Regular_Italic,
+  })
+
+  if (!fontsLoaded) {
+    return null
+  }
   return (
     <Tabs
       screenOptions={{

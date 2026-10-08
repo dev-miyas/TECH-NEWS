@@ -1,6 +1,6 @@
 import { StyleSheet,Pressable, Text ,ScrollView} from 'react-native'
 import useTheme from '../../store/useTheme'
-import { CATEGORIES } from '../data/catagories';
+import { CATEGORIES } from '../../data/catagories';
 import { useState } from 'react';
 
 export default function Chips() {
