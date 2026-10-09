@@ -6,12 +6,14 @@ import {
   Alert,
   StyleSheet,
 } from "react-native";
+import { useState,useEffect } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import Tag from "./tag";
 import Caption from "./caption";
 import useTheme from "../../store/useTheme";
 import { FONTS } from "../../utils/fonts";
-
+import useBookmarkStore from "../../store/useBookmarStore";
+import { getItem } from "../../utils/storage";
 export default function ListView({
   imageUrl,
   tagLabel,
@@ -20,9 +22,38 @@ export default function ListView({
   readTime,
   postedTime,
 }) {
+  const [isBookmarked,setIsBookmarked]=useState(false);
   const { colors, spacing, fSize } = useTheme();
+  const {addBookmark,removeBookmark}=useBookmarkStore()
   const styles = makeStyles(colors);
+useEffect(() => {
+    const checkBookmark = async () => {
+      const bookmarks = await getItem("bookmarks");
+      if(bookmarks) {
+        const parsedBookmarks = JSON.parse(bookmarks);
+        const isBookmarked = parsedBookmarks.some(
+          (articleTitle) => { const result = articleTitle === title;
+            return result;
+          } 
+        );
 
+        setIsBookmarked(isBookmarked);
+      }
+      else {
+        setIsBookmarked(false);
+      }
+    };
+
+    checkBookmark();
+  }, [title]);
+  const handleBookmark = () => {
+    if (isBookmarked) {
+        removeBookmark(title);
+    } else {
+        addBookmark(title);
+    }
+    setIsBookmarked(!isBookmarked);
+  }
   return (
      <>
     <Pressable
@@ -37,6 +68,7 @@ export default function ListView({
           style={styles.listTag}
           textStyle={styles.listTagText}
         />
+
 
         <Text numberOfLines={3} style={styles.title}>
           {title}
@@ -55,9 +87,9 @@ export default function ListView({
         <Pressable
           style={styles.favorite}
           hitSlop={8}
-          onPress={() => Alert.alert("Added to favorites")}
+          
         >
-          <Ionicons name="bookmark-outline" size={18} color={colors.faint} />
+          <Ionicons name={isBookmarked ? "bookmark" : "bookmark-outline"} color={colors.faint} onPress={handleBookmark} />
         </Pressable>
      
       </View>
